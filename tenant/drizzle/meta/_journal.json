@@ -1,0 +1,13 @@
+{
+  "version": "5",
+  "dialect": "pg",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1740115905335,
+      "tag": "0000_long_forge",
+      "breakpoints": true
+    }
+  ]
+}

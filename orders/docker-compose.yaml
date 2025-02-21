@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  order-service:
+    build: .
+    ports:
+      - "8001:8000"
+    environment:
+      - TENANT_ID=47dd6b24-0b23-46b0-a662-776158d089ba
+      - JWT_SECRET=auth_ms_jwt_secret
+      - DB_HOST=order-db
+      - DB_PORT=5432
+      - DB_USER=postgres
+      - DB_PASSWORD=postgres
+      - DB_NAME=order_db
+    depends_on:
+      - order-db
+    networks:
+      - marketplace-network
+
+  order-db:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: order_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5433:5432"
+    volumes:
+      - order_postgres_data:/var/lib/postgresql/data
+    networks:
+      - marketplace-network
+
+volumes:
+  order_postgres_data:
+
+networks:
+  marketplace-network:
+    external: true
