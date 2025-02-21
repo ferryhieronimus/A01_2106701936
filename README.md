@@ -61,15 +61,6 @@ pnpm migrate
 cd ..
 ```
 
-### Alternative: Using a Script
-
-Make the script executable and run:
-
-```bash
-chmod +x setup.sh
-./setup.sh
-```
-
 ## API Endpoints
 
 Refer to yaml files for API documentation.
