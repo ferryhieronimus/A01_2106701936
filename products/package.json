@@ -9,7 +9,13 @@
     "build": "tsc && tsc-alias",
     "generate": "drizzle-kit generate:pg",
     "migrate": "tsx src/db/migrate.ts",
-    "generate-token": "tsx src/generateAdminToken.ts"
+    "generate-token": "tsx src/generateAdminToken.ts",
+    "load-test:get-all-products": "K6_WEB_DASHBOARD=true k6 run k6/tests/getAllProducts.js",
+    "load-test:get-product-by-id": "K6_WEB_DASHBOARD=true k6 run k6/tests/getProductById.js",
+    "load-test:get-all-categories": "K6_WEB_DASHBOARD=true k6 run k6/tests/getAllCategories.js",
+    "load-test:get-category-by-id": "K6_WEB_DASHBOARD=true k6 run k6/tests/getCategoryById.js",
+    "load-test:create-product": "K6_WEB_DASHBOARD=true k6 run k6/tests/createProduct.js",
+    "load-test:create-category": "K6_WEB_DASHBOARD=true k6 run k6/tests/createCategory.js"
   },
   "author": "",
   "license": "ISC",

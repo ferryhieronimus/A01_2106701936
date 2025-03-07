@@ -9,7 +9,11 @@
     "build": "tsc && tsc-alias",
     "generate": "drizzle-kit generate:pg",
     "migrate": "tsx src/db/migrate.ts",
-    "generate-token": "tsx src/generateAdminToken.ts"
+    "generate-token": "tsx src/generateAdminToken.ts",
+    "load-test:create": "K6_WEB_DASHBOARD=true k6 run k6/tests/createTenant.js",
+    "load-test:get": "K6_WEB_DASHBOARD=true k6 run k6/tests/getTenantById.js",
+    "load-test:edit": "K6_WEB_DASHBOARD=true k6 run k6/tests/editTenant.js",
+    "load-test:delete": "K6_WEB_DASHBOARD=true k6 run k6/tests/deleteTenant.js"
   },
   "author": "",
   "license": "ISC",

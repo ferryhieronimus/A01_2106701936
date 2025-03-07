@@ -64,3 +64,42 @@ cd ..
 ## API Endpoints
 
 Refer to yaml files for API documentation.
+
+## Load Test
+
+Below are available load test scripts in each service. Make sure that you are in the correct service directory before running the scripts. Beware that the load test use k6 and there are some environment variables that need to be set in the `.env` file and also setup the data.
+
+```
+// Authentication
+npm run load-test:register
+npm run load-test:login
+
+// Product
+npm run load-test:get-all-products
+npm run load-test:get-product-by-id
+npm run load-test:get-all-categories
+npm run load-test:get-category-by-id
+npm run load-test:create-product
+npm run load-test:create-category
+
+// Order
+npm run load-test:cart:add-item
+npm run load-test:cart:get-all
+npm run load-test:order:get-all
+npm run load-test:order:place
+npm run load-test:order:pay
+npm run load-test:order:cancel
+
+// Wishlist
+npm run load-test:create
+npm run load-test:getall
+npm run load-test:getbyid
+npm run load-test:edit
+npm run load-test:remove
+
+// Tenant
+npm run load-test:get
+npm run load-test:create
+npm run load-test:edit
+npm run load-test:delete
+```

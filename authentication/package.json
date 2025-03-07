@@ -9,7 +9,9 @@
     "build": "tsc && tsc-alias",
     "generate": "drizzle-kit generate:pg",
     "migrate": "tsx src/db/migrate.ts",
-    "generate-token": "tsx src/generateAdminToken.ts"
+    "generate-token": "tsx src/generateAdminToken.ts",
+    "load-test:register": "K6_WEB_DASHBOARD=true k6 run k6/tests/register.js",
+    "load-test:login": "K6_WEB_DASHBOARD=true k6 run k6/tests/login.js"
   },
   "author": "",
   "license": "ISC",

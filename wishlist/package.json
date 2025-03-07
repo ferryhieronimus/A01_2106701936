@@ -9,7 +9,12 @@
     "build": "tsc && tsc-alias",
     "generate": "drizzle-kit generate:pg",
     "migrate": "tsx src/db/migrate.ts",
-    "generate-token": "tsx src/generateAdminToken.ts"
+    "generate-token": "tsx src/generateAdminToken.ts",
+    "load-test:create": "K6_WEB_DASHBOARD=true k6 run k6/tests/createWishlist.js",
+    "load-test:edit": "K6_WEB_DASHBOARD=true k6 run k6/tests/editWishlist.js",
+    "load-test:getall": "K6_WEB_DASHBOARD=true k6 run k6/tests/getAllWishlists.js",
+    "load-test:getbyid": "K6_WEB_DASHBOARD=true k6 run k6/tests/getWishlistById.js",
+    "load-test:remove": "K6_WEB_DASHBOARD=true k6 run k6/tests/removeWishlist.js"
   },
   "author": "",
   "license": "ISC",

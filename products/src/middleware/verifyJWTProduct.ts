@@ -46,7 +46,7 @@ export const verifyJWTProduct = async (
       }
 
       const tenantResponse = await axios.get(
-        `${process.env.TENANT_SERVICE_URL}/api/tenants/${SERVER_TENANT_ID}`,
+        `${process.env.TENANT_SERVICE_URL}/api/tenant/${SERVER_TENANT_ID}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -54,11 +54,11 @@ export const verifyJWTProduct = async (
         }
       );
 
-      if (tenantResponse.status !== 200 || !tenantResponse.data.data) {
+      if (tenantResponse.status !== 200 || !tenantResponse.data) {
         return res.status(500).send({ message: "Server Tenant not found" });
       }
 
-      const tenantData = tenantResponse.data.data as {
+      const tenantData = tenantResponse.data as {
         tenants: {
           id: string;
           owner_id: string;
