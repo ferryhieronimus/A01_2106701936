@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: product-db-service
+  namespace: product
+spec:
+  selector:
+    app: product-db
+  ports:
+  - port: 5434
+    targetPort: 5432
+  type: ClusterIP

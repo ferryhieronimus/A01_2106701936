@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: product-config
+  namespace: product
+data:
+  tenant-id: "4bf747c4-a429-4f6c-83a9-3f38f6393979"
+  admin-tenant-id: "4bf747c4-a429-4f6c-83a9-3f38f6393979"
+  port: "8000"
+  node-env: "development"
+  auth-service-url: "http://auth-service.auth.svc.cluster.local:8000"
+  tenant-service-url: "http://tenant-service.tenant.svc.cluster.local:8003"
