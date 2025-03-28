@@ -56,28 +56,62 @@ paths:
       responses:
         '201':
           description: User successfully registered
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  message:
-                    type: string
-                    example: "User registered successfully"
-                  data:
-                    type: object
-                    properties:
-                      id:
-                        type: string
-                        format: uuid
-                      username:
-                        type: string
-                      email:
-                        type: string
         '400':
-          description: Invalid input
-        '409':
-          description: Username or email already exists
+          description: Validation Failed
+        '500':
+          description: Internal server error
+
+  /api/auth/v1/register:
+    post:
+      summary: Register a new user
+      tags:
+        - Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - username
+                - email
+                - password
+                - full_name
+                - address
+                - phone_number
+              properties:
+                username:
+                  type: string
+                  example: "johndoe"
+                email:
+                  type: string
+                  format: email
+                  example: "john@example.com"
+                password:
+                  type: string
+                  format: password
+                  minLength: 8
+                  pattern: "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).+$"
+                  description: "Password must be at least 8 characters long and include at least one lowercase letter, one uppercase letter, and one number."
+                  example: "StrongPass1"
+                full_name:
+                  type: string
+                  example: "John Doe"
+                address:
+                  type: string
+                  example: "123 Main St, City, Country"
+                phone_number:
+                  type: string
+                  example: "+1234567890"
+      responses:
+        '201':
+          description: User successfully registered
+        '400':
+          description: Validation Failed
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
 
   /api/auth/login:
     post:
@@ -104,26 +138,46 @@ paths:
                   example: "StrongPass1"
       responses:
         '200':
-          description: Login successful
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  token:
-                    type: string
-                  user:
-                    type: object
-                    properties:
-                      id:
-                        type: string
-                        format: uuid
-                      username:
-                        type: string
-                      email:
-                        type: string
+          description: User logged in successfully
+        '400':
+          description: Validation Failed
+        '404':
+          description: User not found
+        '500':
+          description: Internal server error
+
+  /api/auth/v1/login:
+    post:
+      summary: Login user
+      tags:
+        - Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - username
+                - password
+              properties:
+                username:
+                  type: string
+                  example: "johndoe"
+                password:
+                  type: string
+                  format: password
+                  minLength: 8
+                  example: "StrongPass1"
+      responses:
+        '200':
+          description: User logged in successfully
+        '400':
+          description: Validation Failed
         '401':
-          description: Invalid credentials
+          description: User not found
+        '500':
+          description: Internal server error
 
   /api/auth/verify-token:
     post:
@@ -146,26 +200,38 @@ paths:
                   example: "your-jwt-token"
       responses:
         '200':
-          description: Token is valid
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  valid:
-                    type: boolean
-                  user:
-                    type: object
-                    properties:
-                      id:
-                        type: string
-                        format: uuid
-                      username:
-                        type: string
-                      email:
-                        type: string
+          description: Admin token is valid
+        '403':
+          description: Invalid token
+        '500':
+          description: Internal server error
+
+  /api/auth/v1/verify-token:
+    post:
+      summary: Verify JWT token
+      tags:
+        - Authentication
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - token
+              properties:
+                token:
+                  type: string
+                  example: "your-jwt-token"
+      responses:
+        '200':
+          description: Admin token is valid
         '401':
           description: Invalid token
+        '500':
+          description: Internal server error
 
   /api/auth/verify-admin-token:
     post:
@@ -189,27 +255,85 @@ paths:
       responses:
         '200':
           description: Admin token is valid
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  valid:
-                    type: boolean
-                  user:
-                    type: object
-                    properties:
-                      id:
-                        type: string
-                        format: uuid
-                      username:
-                        type: string
-                      email:
-                        type: string
-                      isAdmin:
-                        type: boolean
+        '403':
+          description: Invalid token
+        '500':
+          description: Internal server error
+
+  /api/auth/v1/verify-admin-token:
+    post:
+      summary: Verify admin JWT token
+      tags:
+        - Authentication
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - token
+              properties:
+                token:
+                  type: string
+                  example: "your-admin-jwt-token"
+      responses:
+        '200':
+          description: Admin token is valid
         '401':
-          description: Invalid admin token
+          description: Invalid token
+        '500':
+          description: Internal server error
+    post:
+      summary: Register a new user
+      tags:
+        - Authentication
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - username
+                - email
+                - password
+                - full_name
+                - address
+                - phone_number
+              properties:
+                username:
+                  type: string
+                  example: "johndoe"
+                email:
+                  type: string
+                  format: email
+                  example: "john@example.com"
+                password:
+                  type: string
+                  format: password
+                  minLength: 8
+                  pattern: "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).+$"
+                  description: "Password must be at least 8 characters long and include at least one lowercase letter, one uppercase letter, and one number."
+                  example: "StrongPass1"
+                full_name:
+                  type: string
+                  example: "John Doe"
+                address:
+                  type: string
+                  example: "123 Main St, City, Country"
+                phone_number:
+                  type: string
+                  example: "+1234567890"
+      responses:
+        '201':
+          description: User successfully registered
+        '400':
+          description: Validation Failed
+        '500':
+          description: Internal server error
 
 components:
   securitySchemes:

@@ -6,7 +6,7 @@ services:
     ports:
       - "8004:8000"
     environment:
-      - TENANT_ID=9054983f-77b9-4db6-b2ff-fa4c858b0a1f
+      - TENANT_ID=4bf747c4-a429-4f6c-83a9-3f38f6393979
       - JWT_SECRET=auth_ms_jwt_secret
       - DB_HOST=wishlist-db
       - DB_PORT=5432

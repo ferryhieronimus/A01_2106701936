@@ -19,12 +19,8 @@ paths:
       responses:
         '200':
           description: List of products
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Product'
+        '500':
+          description: Internal server error
     post:
       summary: Create new product
       tags:
@@ -40,12 +36,10 @@ paths:
       responses:
         '201':
           description: Product created successfully
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Product'
         '401':
           description: Unauthorized
+        '500':
+          description: Internal server error
 
   /api/product/many:
     post:
@@ -69,12 +63,8 @@ paths:
       responses:
         '200':
           description: List of products
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Product'
+        '500':
+          description: Internal server error
 
   /api/product/{id}:
     get:
@@ -91,12 +81,10 @@ paths:
       responses:
         '200':
           description: Product details
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Product'
         '404':
           description: Product not found
+        '500':
+          description: Internal server error
     put:
       summary: Update product
       tags:
@@ -123,6 +111,8 @@ paths:
           description: Unauthorized
         '404':
           description: Product not found
+        '500':
+          description: Internal server error
     delete:
       summary: Delete product
       tags:
@@ -143,6 +133,8 @@ paths:
           description: Unauthorized
         '404':
           description: Product not found
+        '500':
+          description: Internal server error
 
   /api/product/category:
     get:
@@ -152,12 +144,8 @@ paths:
       responses:
         '200':
           description: List of categories
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Category'
+        '500':
+          description: Internal server error
     post:
       summary: Create new category
       tags:
@@ -175,6 +163,8 @@ paths:
           description: Category created successfully
         '401':
           description: Unauthorized
+        '500':
+          description: Internal server error
 
   /api/product/category/{category_id}:
     get:
@@ -191,14 +181,10 @@ paths:
       responses:
         '200':
           description: List of products in category
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Product'
         '404':
           description: Category not found
+        '500':
+          description: Internal server error
     put:
       summary: Update category
       tags:
@@ -225,6 +211,9 @@ paths:
           description: Unauthorized
         '404':
           description: Category not found
+        '500':
+          description: Internal server error
+
     delete:
       summary: Delete category
       tags:
@@ -245,34 +234,11 @@ paths:
           description: Unauthorized
         '404':
           description: Category not found
+        '500':
+          description: Internal server error
 
 components:
   schemas:
-    Product:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        name:
-          type: string
-        description:
-          type: string
-        price:
-          type: number
-          format: float
-        quantity_available:
-          type: number
-        category_id:
-          type: string
-          format: uuid
-        created_at:
-          type: string
-          format: date-time
-        updated_at:
-          type: string
-          format: date-time
-
     CreateProductRequest:
       type: object
       required:
@@ -308,18 +274,6 @@ components:
         category_id:
           type: string
           format: uuid
-
-    Category:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-        name:
-          type: string
-        description:
-          type: string
-
     CreateCategoryRequest:
       type: object
       required:

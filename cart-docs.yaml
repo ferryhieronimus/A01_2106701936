@@ -21,29 +21,10 @@ paths:
       responses:
         '200':
           description: List of cart items
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  data:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        id:
-                          type: string
-                          format: uuid
-                        product_id:
-                          type: string
-                          format: uuid
-                        quantity:
-                          type: integer
-                        user_id:
-                          type: string
-                          format: uuid
         '401':
           description: Unauthorized
+        '500':
+          description: Internal server error
 
     post:
       summary: Add item to cart
@@ -72,32 +53,17 @@ paths:
       responses:
         '201':
           description: Item added to cart
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  message:
-                    type: string
-                    example: "Item added to cart"
-                  data:
-                    type: object
-                    properties:
-                      id:
-                        type: string
-                        format: uuid
-                      product_id:
-                        type: string
-                        format: uuid
-                      quantity:
-                        type: integer
         '400':
           description: Invalid input
         '401':
           description: Unauthorized
+        '404':
+          description: Product not found
+        '500':
+          description: Internal server error
 
     put:
-      summary: Edit cart item
+      summary: Update cart item quantity
       tags:
         - Cart
       security:
@@ -122,28 +88,14 @@ paths:
       responses:
         '200':
           description: Cart item updated
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  message:
-                    type: string
-                    example: "Cart item updated"
-                  data:
-                    type: object
-                    properties:
-                      id:
-                        type: string
-                        format: uuid
-                      quantity:
-                        type: integer
         '400':
           description: Invalid input
         '401':
           description: Unauthorized
         '404':
           description: Cart item not found
+        '500':
+          description: Internal server error
 
     delete:
       summary: Delete cart item
@@ -167,18 +119,42 @@ paths:
       responses:
         '200':
           description: Cart item deleted
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  message:
-                    type: string
-                    example: "Cart item deleted"
         '401':
           description: Unauthorized
         '404':
           description: Cart item not found
+        '500':
+          description: Internal server error
+
+  /api/cart/v1:
+    delete:
+      summary: Delete cart item
+      tags:
+        - Cart
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - product_id
+              properties:
+                product_id:
+                  type: string
+                  format: uuid
+                  example: "123e4567-e89b-12d3-a456-426614174000"
+      responses:
+        '204':
+          description: Cart item deleted
+        '401':
+          description: Unauthorized
+        '404':
+          description: Cart item not found
+        '500':
+          description: Internal server error
 
 components:
   securitySchemes:

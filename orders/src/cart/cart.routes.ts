@@ -24,5 +24,11 @@ router.delete(
   validate(Validation.deleteCartItemSchema),
   Handler.deleteCartItemHandler
 );
+router.delete(
+  "/v1",
+  verifyJWT,
+  validate(Validation.deleteCartItemSchema),
+  Handler.deleteCartItemHandlerV1
+);
 
 export default router;

@@ -22,7 +22,7 @@ function getAuthToken() {
   return "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjVlN2I1ZDA1LWZmNzYtNGJhZi04ZDhhLTAyZTkxZGUzZDk5NSIsInRlbmFudF9pZCI6IjkwNTQ5ODNmLTc3YjktNGRiNi1iMmZmLWZhNGM4NThiMGExZiIsImlhdCI6MTc0MTMyNjA4MCwiZXhwIjoxNzQxNDEyNDgwfQ.PNZpmyGgeiqC5o7PSKjNR2ZwheSK8_e1Xls1gSrhWgQ";
 }
 
-const TENANT_ID = "9054983f-77b9-4db6-b2ff-fa4c858b0a1f";
+const TENANT_ID = "4bf747c4-a429-4f6c-83a9-3f38f6393979";
 
 export default function () {
   const token = getAuthToken();

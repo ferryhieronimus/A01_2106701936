@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: auth-config
+  namespace: auth
+data:
+  tenant-id: "4bf747c4-a429-4f6c-83a9-3f38f6393979"
+  admin-tenant-id: "4bf747c4-a429-4f6c-83a9-3f38f6393979"
+  port: "8000"
+  node-env: "development"

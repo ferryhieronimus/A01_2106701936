@@ -38,7 +38,7 @@ export const placeOrderService = async (
       return new BadRequestResponse("Cart is empty").generate();
     }
     const products: AxiosResponse<Product[], any> = await axios.post(
-      `${process.env.PRODUCT_MS_URL}/product/many`,
+      `${process.env.PRODUCT_SERVICE_URL}/api/product/many`,
       { productIds }
     );
     if (products.status !== 200) {

@@ -44,3 +44,18 @@ export const removeProductFromWishlistHandler = async (req: Request, res: Respon
     const response = await Service.removeProductFromWishlistService(id, user);
     return res.status(response.status).send(response.data);
 }
+
+export const removeProductFromWishlistHandlerV1 = async (
+  req: Request,
+  res: Response
+) => {
+  const { user, id } = req.body;
+  const response = await Service.removeProductFromWishlistServiceV1(id, user);
+  return res.status(response.status).send();
+};
+
+export const deleteWishlistHandlerV1 = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const response = await Service.deleteWishlistServiceV1(id);
+  return res.status(response.status).send();
+};

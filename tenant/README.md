@@ -53,7 +53,7 @@ PORT=8005
 NODE_ENV=development
 
 # Tenant Configuration
-TENANT_ID=9054983f-77b9-4db6-b2ff-fa4c858b0a1f
+TENANT_ID=4bf747c4-a429-4f6c-83a9-3f38f6393979
 
 # Database Configuration
 DB_HOST=localhost

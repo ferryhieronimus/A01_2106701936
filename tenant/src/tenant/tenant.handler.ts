@@ -26,3 +26,21 @@ export const deleteTenantHandler = async (req: Request, res: Response) => {
   const response = await Service.deleteTenantService(user, tenant_id);
   return res.status(response.status).send(response.data);
 }
+
+export const getTenantHandlerV1 = async (req: Request, res: Response) => {
+  const { tenant_id } = req.params;
+  const response = await Service.getTenantServiceV1(tenant_id);
+  return res.status(response.status).send(response.data);
+};
+
+export const createTenantHandlerV1 = async (req: Request, res: Response) => {
+  const { name, user } = req.body;
+  const response = await Service.createTenantServiceV1(user.id, name);
+  return res.status(response.status).send(response.data);
+};
+
+export const deleteTenantHandlerV1 = async (req: Request, res: Response) => {
+  const { user, tenant_id } = req.body;
+  const response = await Service.deleteTenantServiceV1(user, tenant_id);
+  return res.status(response.status).send();
+};

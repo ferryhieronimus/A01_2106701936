@@ -19,16 +19,12 @@ paths:
       security:
         - BearerAuth: []
       responses:
-        '200':
+        "200":
           description: List of user wishlists
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Wishlist'
-        '401':
+        "401":
           description: Unauthorized
+        "500":
+          description: Internal server error
 
     post:
       summary: Create new wishlist
@@ -41,16 +37,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CreateWishlistRequest'
+              $ref: "#/components/schemas/CreateWishlistRequest"
       responses:
-        '201':
+        "201":
           description: Wishlist created successfully
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Wishlist'
-        '401':
+        "401":
           description: Unauthorized
+        "500":
+          description: Internal server error
 
   /api/wishlist/{id}:
     get:
@@ -67,16 +61,12 @@ paths:
             type: string
             format: uuid
       responses:
-        '200':
+        "200":
           description: Wishlist details
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Wishlist'
-        '401':
+        "401":
           description: Unauthorized
-        '404':
-          description: Wishlist not found
+        "500":
+          description: Internal server error
 
     put:
       summary: Update wishlist
@@ -96,18 +86,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/UpdateWishlistRequest'
+              $ref: "#/components/schemas/UpdateWishlistRequest"
       responses:
-        '200':
+        "200":
           description: Wishlist updated successfully
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Wishlist'
-        '401':
+        "401":
           description: Unauthorized
-        '404':
-          description: Wishlist not found
+        "500":
+          description: Internal server error
 
     delete:
       summary: Delete wishlist
@@ -123,20 +109,12 @@ paths:
             type: string
             format: uuid
       responses:
-        '200':
+        "200":
           description: Wishlist deleted successfully
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  message:
-                    type: string
-                    example: "Wishlist deleted successfully"
-        '401':
+        "401":
           description: Unauthorized
-        '404':
-          description: Wishlist not found
+        "500":
+          description: Internal server error
 
   /api/wishlist/add:
     post:
@@ -150,22 +128,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/AddProductToWishlistRequest'
+              $ref: "#/components/schemas/AddProductToWishlistRequest"
       responses:
-        '200':
+        "200":
           description: Product added to wishlist successfully
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  message:
-                    type: string
-                    example: "Product added to wishlist successfully"
-        '401':
+        "401":
           description: Unauthorized
-        '404':
-          description: Wishlist or product not found
+        "500":
+          description: Internal server error
 
   /api/wishlist/remove:
     delete:
@@ -174,34 +144,74 @@ paths:
         - Wishlist Products
       security:
         - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - id
+              properties:
+                id:
+                  type: string
+                  format: uuid
+      responses:
+        "200":
+          description: Product removed from wishlist successfully
+        "401":
+          description: Unauthorized
+        "500":
+          description: Internal server error
+
+  /api/wishlist/v1/remove:
+    delete:
+      summary: Remove product from wishlist
+      tags:
+        - Wishlist Products
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - id
+              properties:
+                id:
+                  type: string
+                  format: uuid
+      responses:
+        "204":
+          description: Product removed from wishlist successfully
+        "401":
+          description: Unauthorized
+        "500":
+          description: Internal server error
+
+  /api/wishlist/v1/{id}:
+    delete:
+      summary: Delete wishlist
+      tags:
+        - Wishlists
+      security:
+        - BearerAuth: []
       parameters:
-        - name: wishlist_id
-          in: query
-          required: true
-          schema:
-            type: string
-            format: uuid
-        - name: product_id
-          in: query
+        - name: id
+          in: path
           required: true
           schema:
             type: string
             format: uuid
       responses:
-        '200':
-          description: Product removed from wishlist successfully
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  message:
-                    type: string
-                    example: "Product removed from wishlist successfully"
-        '401':
+        "204":
+          description: Wishlist deleted successfully
+        "401":
           description: Unauthorized
-        '404':
-          description: Product not found in wishlist
+        "500":
+          description: Internal server error
 
 components:
   schemas:
@@ -211,31 +221,31 @@ components:
         id:
           type: string
           format: uuid
+        tenant_id:
+          type: string
+          format: uuid
         user_id:
           type: string
           format: uuid
         name:
           type: string
-        created_at:
-          type: string
-          format: date-time
-        updated_at:
-          type: string
-          format: date-time
         products:
           type: array
           items:
-            $ref: '#/components/schemas/WishlistProduct'
+            $ref: "#/components/schemas/WishlistDetail"
 
-    WishlistProduct:
+    WishlistDetail:
       type: object
       properties:
+        id:
+          type: string
+          format: uuid
+        wishlist_id:
+          type: string
+          format: uuid
         product_id:
           type: string
           format: uuid
-        added_at:
-          type: string
-          format: date-time
 
     CreateWishlistRequest:
       type: object
