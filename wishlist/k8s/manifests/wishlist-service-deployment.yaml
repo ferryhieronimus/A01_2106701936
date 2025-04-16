@@ -14,76 +14,76 @@ spec:
         app: wishlist-service
     spec:
       containers:
-      - name: wishlist-service
-        image: wishlist-service:latest
-        imagePullPolicy: IfNotPresent
-        ports:
-        - containerPort: 8000
-        resources:
-          requests:
-            cpu: "100m"
-            memory: "128Mi"
-          limits:
-            cpu: "500m"
-            memory: "256Mi"
-        env:
-        - name: TENANT_ID
-          valueFrom:
-            configMapKeyRef:
-              name: wishlist-config
-              key: tenant-id
-        - name: ADMIN_TENANT_ID
-          valueFrom:
-            configMapKeyRef:
-              name: wishlist-config
-              key: admin-tenant-id
-        - name: PORT
-          valueFrom:
-            configMapKeyRef:
-              name: wishlist-config
-              key: port
-        - name: NODE_ENV
-          valueFrom:
-            configMapKeyRef:
-              name: wishlist-config
-              key: node-env
-        - name: JWT_SECRET
-          valueFrom:
-            secretKeyRef:
-              name: wishlist-secrets
-              key: jwt-secret
-        - name: ADMIN_JWT_SECRET
-          valueFrom:
-            secretKeyRef:
-              name: wishlist-secrets
-              key: admin-jwt-secret
-        - name: DB_HOST
-          valueFrom:
-            secretKeyRef:
-              name: wishlist-secrets
-              key: db-host
-        - name: DB_PORT
-          valueFrom:
-            secretKeyRef:
-              name: wishlist-secrets
-              key: db-port
-        - name: DB_USER
-          valueFrom:
-            secretKeyRef:
-              name: wishlist-secrets
-              key: db-user
-        - name: DB_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: wishlist-secrets
-              key: db-password
-        - name: DB_NAME
-          valueFrom:
-            secretKeyRef:
-              name: wishlist-secrets
-              key: db-name
-        - name: AUTH_SERVICE_URL
-          valueFrom:
-            configMapKeyRef:
-              name: wishlist-config
-              key: auth-service-url
+        - name: wishlist-service
+          image: ferry11/wishlist-service:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8000
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "500m"
+              memory: "512Mi"
+          env:
+            - name: TENANT_ID
+              valueFrom:
+                configMapKeyRef:
+                  name: wishlist-config
+                  key: tenant-id
+            - name: ADMIN_TENANT_ID
+              valueFrom:
+                configMapKeyRef:
+                  name: wishlist-config
+                  key: admin-tenant-id
+            - name: PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: wishlist-config
+                  key: port
+            - name: NODE_ENV
+              valueFrom:
+                configMapKeyRef:
+                  name: wishlist-config
+                  key: node-env
+            - name: JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: wishlist-secrets
+                  key: jwt-secret
+            - name: ADMIN_JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: wishlist-secrets
+                  key: admin-jwt-secret
+            - name: DB_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: wishlist-secrets
+                  key: db-host
+            - name: DB_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: wishlist-secrets
+                  key: db-port
+            - name: DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: wishlist-secrets
+                  key: db-user
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: wishlist-secrets
+                  key: db-password
+            - name: DB_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: wishlist-secrets
+                  key: db-name
+            - name: AUTH_SERVICE_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: wishlist-config
+                  key: auth-service-url

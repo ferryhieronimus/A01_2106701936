@@ -14,81 +14,81 @@ spec:
         app: order-service
     spec:
       containers:
-      - name: order-service
-        image: order-service:latest
-        imagePullPolicy: IfNotPresent
-        ports:
-        - containerPort: 8000
-        resources:
-          requests:
-            cpu: "100m"
-            memory: "128Mi"
-          limits:
-            cpu: "500m"
-            memory: "256Mi"
-        env:
-        - name: TENANT_ID
-          valueFrom:
-            configMapKeyRef:
-              name: order-config
-              key: tenant-id
-        - name: ADMIN_TENANT_ID
-          valueFrom:
-            configMapKeyRef:
-              name: order-config
-              key: admin-tenant-id
-        - name: PORT
-          valueFrom:
-            configMapKeyRef:
-              name: order-config
-              key: port
-        - name: NODE_ENV
-          valueFrom:
-            configMapKeyRef:
-              name: order-config
-              key: node-env
-        - name: JWT_SECRET
-          valueFrom:
-            secretKeyRef:
-              name: order-secrets
-              key: jwt-secret
-        - name: ADMIN_JWT_SECRET
-          valueFrom:
-            secretKeyRef:
-              name: order-secrets
-              key: admin-jwt-secret
-        - name: DB_HOST
-          valueFrom:
-            secretKeyRef:
-              name: order-secrets
-              key: db-host
-        - name: DB_PORT
-          valueFrom:
-            secretKeyRef:
-              name: order-secrets
-              key: db-port
-        - name: DB_USER
-          valueFrom:
-            secretKeyRef:
-              name: order-secrets
-              key: db-user
-        - name: DB_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: order-secrets
-              key: db-password
-        - name: DB_NAME
-          valueFrom:
-            secretKeyRef:
-              name: order-secrets
-              key: db-name
-        - name: AUTH_SERVICE_URL
-          valueFrom:
-            configMapKeyRef:
-              name: order-config
-              key: auth-service-url
-        - name: PRODUCT_SERVICE_URL
-          valueFrom:
-            configMapKeyRef:
-              name: order-config
-              key: product-service-url
+        - name: order-service
+          image: ferry11/order-service:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8000
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "500m"
+              memory: "512Mi"
+          env:
+            - name: TENANT_ID
+              valueFrom:
+                configMapKeyRef:
+                  name: order-config
+                  key: tenant-id
+            - name: ADMIN_TENANT_ID
+              valueFrom:
+                configMapKeyRef:
+                  name: order-config
+                  key: admin-tenant-id
+            - name: PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: order-config
+                  key: port
+            - name: NODE_ENV
+              valueFrom:
+                configMapKeyRef:
+                  name: order-config
+                  key: node-env
+            - name: JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: order-secrets
+                  key: jwt-secret
+            - name: ADMIN_JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: order-secrets
+                  key: admin-jwt-secret
+            - name: DB_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: order-secrets
+                  key: db-host
+            - name: DB_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: order-secrets
+                  key: db-port
+            - name: DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: order-secrets
+                  key: db-user
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: order-secrets
+                  key: db-password
+            - name: DB_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: order-secrets
+                  key: db-name
+            - name: AUTH_SERVICE_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: order-config
+                  key: auth-service-url
+            - name: PRODUCT_SERVICE_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: order-config
+                  key: product-service-url
